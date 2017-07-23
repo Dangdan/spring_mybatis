@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 环境变量的配置，但是在和spring整合之后就没用啦 -->
+	<properties resource="db.properties"></properties>
+	
+	<settings>
+		<!-- 打开延迟加载开关 -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<!-- 将积极加载改变成消极加载，也就是需要时加载 -->
+		<setting name="aggressiveLazyLoading" value="false"/>
+		<!-- 开启二级缓存 -->
+		<setting name="cacheEnabled" value="true"/>
+	</settings>
+	
+	<typeAliases>
+		<!-- 单个别名的定义，type是路径，别名是alias 
+		<typeAlias type="com.ddd.mybatis.pojo" alias="User"/>
+		-->
+		<!-- 批量别名这个包名，mybatis会自动扫描这个包，别名是该包下的类名，首字母大写or小写都可以 -->
+		<package name="com.ddd.mybatis.pojo"/>
+	
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC">
+			</transactionManager>
+			<dataSource type="POOLED">
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
+				<property name="driver" value="${jdbc.driver}" />
+			</dataSource>
+		</environment>
+	</environments>
+	<!-- 加载映射文件 -->
+	<mappers>
+		<mapper resource="sqlmap/User.xml" />
+		<!-- 
+		通过resource来配置，也可以通过url来配置其物理路径 
+		<mapper resource="mapper/UserMapper.xml" />
+		-->
+		<!-- 通过接口来配置映射文件，但是要符合这个接口的名字和它的xml文件同名字，并且在同一个目录中
+		这些规范的前提是要求使用mapper代理的方法
+		它和上面的resource是一样的效果 
+		
+		-->
+		<!-- 
+		加载单个的mapper接口 
+		<mapper class="com.ddd.mybatis.mapper.UserMapper"/>
+		-->
+		<!-- 同样的道理我们可以批量的加载 -->
+		<package name="com.ddd.mybatis.mapper"/>
+	</mappers>
+</configuration>
