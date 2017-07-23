@@ -1,1 +1,3 @@
 # spring_mybatis
+这是spring和mybatis还没有和springmvc之前做的一个demo，其中包括了mybatis的基础和mybatis的缓存等，以及和ehcache分布式缓存框架整合的方式，还有spring整合mybatis的步骤
+欢迎来我的博客看详细教程：http://blog.csdn.net/fromddd/article/category/7031388
